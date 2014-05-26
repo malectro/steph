@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>The News</title>
+
+    <link rel="stylesheet/less" href="/less/app.less" >
+
+    <script src="/util/less.js"></script>
+    <script src="/util/underscore.js"></script>
+    <script src="/util/wonderscore.js"></script>
+    <script src="/util/zepto.js"></script>
+    <script src="/util/backbone.js"></script>
+    <script src="/util/require.js"></script>
+    <script src="/tmpl/tmpl.js"></script>
+    <script src="/ux/app.js"></script>
+
+    <script>
+      UX.env = {
+        user: <%= JSON.stringify(t.req.user || null) %>
+      };
+    </script>
+
+  </head>
+
+  <body>
+    <canvas id="map"></canvas>
+    <% if (t.req.user) { %>
+      <%- t.req.user.id %>
+    <% } else { %>
+      <a href="/auth/twitter">log in</a>
+    <% } %>
+  </body>
+</html>

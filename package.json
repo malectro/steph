@@ -1,0 +1,22 @@
+{
+  "name": "thenews",
+  "description": "a place to share the news",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "underscore": "1.x",
+    "mongoose": "3.5.x",
+    "express": "4.x",
+    "passport": "x",
+    "passport-twitter": "x",
+    "consolidate": "0.4.x",
+    "connect-assetmanager": "0.x",
+    "body-parser": "1.x",
+    "cookie-parser": "1.x",
+    "express-session": "1.x"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  }
+}

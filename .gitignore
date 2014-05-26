@@ -1,0 +1,5 @@
+# Ignore NPM modules #
+######################
+node_modules/
+.env
+env.js
