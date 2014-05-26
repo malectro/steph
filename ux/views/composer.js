@@ -3,7 +3,10 @@
   var Composer = UX.View.Composer = Backbone.View.extend({
 
     events: {
-      'submit form': 'submit'
+      'submit form': 'submit',
+      'keydown textarea': 'keydown',
+      'keyup textarea': 'keyup',
+      'blur textarea': 'blur'
     },
 
     initialize: function (options) {
@@ -55,9 +58,29 @@
           self.enable();
         },
         success: function () {
-          //self.hide();
+          self.$('textarea').val('');
         }
       });
+    },
+
+    keydown: function (event) {
+      // alt
+      if (event.which === 18) {
+        this._holdAlt = true;
+      // enter
+      } else if (event.which === 13 && !this._holdAlt) {
+        this.$('form').submit();
+      }
+    },
+
+    keyup: function (event) {
+      if (event.which === 18) {
+        this._holdAlt = false;
+      }
+    },
+
+    blur: function (event) {
+      this._holdAlt = false;
     }
 
   });
