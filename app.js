@@ -25,7 +25,7 @@ if (_.isUndefined(process)) {
   var process = {env: env};
 }
 var PORT = process.env.PORT || 3000;
-var TITLE = 'The News';
+var TITLE = 'TheNews';
 
 
 // app
