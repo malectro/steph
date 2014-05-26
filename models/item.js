@@ -10,5 +10,5 @@ var Schema = Item.Schema = mongoose.Schema({
   text: String,
 });
 
-Schema.index({user: 1}, {unique: true});
+Schema.index({user: 1});
 

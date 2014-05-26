@@ -30,6 +30,13 @@
           user: this.user,
           items: this.items
         }).render().show();
+
+        this.reader = new UX.View.Reader({
+          user: this.user,
+          items: this.items
+        }).render().show();
+
+        this.items.fetch();
       }
 
       console.log('initialized main view');
@@ -44,7 +51,8 @@
   require([
     'ux/models/user',
     'ux/models/item',
-    'ux/views/composer'
+    'ux/views/composer',
+    'ux/views/reader'
   ], false, UX.init);
 
 }).call(this);

@@ -229,7 +229,7 @@ App.routes = function () {
   // items
   app.route('/items').
     get(function (req, res) {
-      Model.Item.find().exec(function (error, item) {
+      Model.Item.find().exec(function (error, items) {
         res.json(items);
       });
     }).
