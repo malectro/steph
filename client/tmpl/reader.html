@@ -1,7 +1,7 @@
 <items>
   <% t.items.each(function (item) { %>
     <item>
-      <a class="link">href="<%- item.get('link') %>"><%- item.get('link') %></a>
+      <a class="link" href="<%- item.get('link') %>"><%- item.get('link') %></a>
       <author><%- item.author_name() %></author>
       <text><%- item.get('text') %></text>
     </item>
