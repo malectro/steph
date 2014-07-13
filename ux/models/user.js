@@ -2,13 +2,14 @@
 
   var User = UX.Model.User = Backbone.Model.extend({
 
-    idAttribute: '_id'
+    idAttribute: '_id',
 
   });
 
   var Users = UX.List.Users = Backbone.Collection.extend({
 
-    model: User
+    model: User,
+    url: '/users',
 
   });
 

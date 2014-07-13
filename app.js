@@ -211,7 +211,20 @@ App.routes = function () {
 
   // home
   app.get('/', function (req, res) {
-    res.render('index', {req: req});
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('index', context);
+    });
+
+    Model.User.find().exec(function (error, users) {
+      context.users = _.invoke(users, 'publicJSON');
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
+    });
   });
 
   // auth
@@ -225,6 +238,14 @@ App.routes = function () {
     successRedirect: '/',
     failureRedirect: '/'
   }));
+
+  // users
+  app.route('/users').
+    get(function (req, res) {
+      Model.User.find().exec(function (error, users) {
+        res.json(_.invoke(users, 'publicJSON'));
+      });
+    });
 
   // items
   app.route('/items').

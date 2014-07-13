@@ -87,6 +87,13 @@ _.extend(Schema.methods, {
     attributes = _.pick(attributes, 'email');
 
     this.update(attributes, callback);
+  },
+
+  publicJSON: function () {
+    return {
+      id: this.id,
+      username: this.username
+    };
   }
 });
 

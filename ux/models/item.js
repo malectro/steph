@@ -2,7 +2,16 @@
 
   var Item = UX.Model.Item = Backbone.Model.extend({
 
-    idAttribute: '_id'
+    idAttribute: '_id',
+
+    author: function () {
+      return UX.app.users.get(this.get('item'));
+    },
+
+    author_name: function () {
+      var author = this.author();
+      return (author) ? author.get('username') : 'unknown';
+    }
 
   });
 

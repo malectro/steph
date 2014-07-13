@@ -16,21 +16,28 @@
 
     <script>
       UX.env = {
+        el: 'body',
         user: <%= JSON.stringify(t.req.user || null) %>,
-        el: 'body'
+        users: <%= JSON.stringify(t.users) %>,
+        items: <%= JSON.stringify(t.items) %>
       };
     </script>
 
   </head>
 
   <body class="loading">
-    <% if (t.req.user) { %>
-      <%- t.req.user.id %>
-    <% } else { %>
-      <a href="/auth/twitter">log in</a>
-    <% } %>
+    <div class="ux-navbar">
+      <div class="profile">
+        <% if (t.req.user) { %>
+          <span><%- t.req.user.username %></span>
+        <% } else { %>
+          <a href="/auth/twitter">log in</a>
+        <% } %>
+      </div>
+    </div>
 
     <div class="ux-reader"></div>
     <div class="ux-composer"></div>
   </body>
+
 </html>

@@ -23,29 +23,28 @@
 
     initialize: function (options) {
       this.user = new UX.Model.User(options.user);
-      this.items = new UX.List.Items;
+      this.users = new UX.List.Users(options.users);
+      this.items = new UX.List.Items(options.items);
 
       if (this.user.id) {
         this.composer = new UX.View.Composer({
           user: this.user,
           items: this.items
         });
-
-        this.reader = new UX.View.Reader({
-          user: this.user,
-          items: this.items
-        });
-
-        this.items.fetch();
-
-        this.render();
       }
+
+      this.reader = new UX.View.Reader({
+        user: this.user,
+        items: this.items
+      });
 
       console.log('initialized main view');
     },
 
     render: function () {
-      this.composer.setElement(this.$('.ux-composer')).render().show();
+      if (this.composer) {
+        this.composer.setElement(this.$('.ux-composer')).render().show();
+      }
       this.reader.setElement(this.$('.ux-reader')).render();
 
       this.$el.removeClass('loading');
@@ -55,6 +54,7 @@
 
   UX.init = function () {
     UX.app = new UX.View.App(UX.env);
+    UX.app.render();
   };
 
   require([
