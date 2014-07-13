@@ -4,6 +4,15 @@ html, body {
   height: 100%;
 }
 
+body {
+  transition: opacity 0.2s;
+
+  &.loading {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+}
+
 .ux-composer {
   @width: 300px;
 

@@ -7,7 +7,7 @@ var Item = exports;
 
 var Schema = Item.Schema = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  link: String,
+  item: {type: mongoose.Schema.Types.ObjectId, ref: 'Item'},
   text: String,
 });
 

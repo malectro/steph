@@ -20,12 +20,6 @@
       }));
 
       return this;
-    },
-
-    show: function () {
-      this.$el.hide();
-      $(document.body).append(this.$el);
-      this.$el.show();
     }
 
   });

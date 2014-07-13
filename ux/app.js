@@ -29,17 +29,26 @@
         this.composer = new UX.View.Composer({
           user: this.user,
           items: this.items
-        }).render().show();
+        });
 
         this.reader = new UX.View.Reader({
           user: this.user,
           items: this.items
-        }).render().show();
+        });
 
         this.items.fetch();
+
+        this.render();
       }
 
       console.log('initialized main view');
+    },
+
+    render: function () {
+      this.composer.setElement(this.$('.ux-composer')).render().show();
+      this.reader.setElement(this.$('.ux-reader')).render();
+
+      this.$el.removeClass('loading');
     }
 
   });

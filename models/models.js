@@ -5,7 +5,8 @@ var Model = exports;
 
 var models = [
   'User',
-  'Item'
+  'Item',
+  'Comment',
 ];
 
 _.each(models, function (model) {
