@@ -38,6 +38,8 @@
         items: this.items
       });
 
+      this.router = new UX.Router();
+
       console.log('initialized main view');
     },
 
@@ -52,9 +54,21 @@
 
   });
 
+  UX.Router = Backbone.Router.extend({
+    routes: {
+      'item/:id': 'showItem'
+    },
+
+    showItem: function (id) {
+      UX.session.set('itemId', id);
+    }
+  });
+
   UX.init = function () {
+    UX.session = new Backbone.Model();
     UX.app = new UX.View.App(UX.env);
     UX.app.render();
+    Backbone.history.start({});
   };
 
   require([

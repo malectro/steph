@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <title>The News</title>
+    <title>Read Club</title>
 
-    <link rel="stylesheet/less" href="/less/app.less" >
+    <link rel="stylesheet/less" href="/less/app.less">
 
     <script src="/util/less.js"></script>
     <script src="/util/underscore.js"></script>
@@ -27,6 +27,7 @@
 
   <body class="loading">
     <div class="ux-navbar">
+      <div class="logo">Read Club</div>
       <div class="profile">
         <% if (t.req.user) { %>
           <span><%- t.req.user.username %></span>
