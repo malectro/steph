@@ -1,6 +1,3 @@
-
-@reader-width: 400px;
-
 html, body {
   width: 100%;
   height: 100%;
@@ -9,81 +6,34 @@ html, body {
 }
 
 body {
-  padding-top: 30px;
-  transition: opacity 0.2s;
-
   &.loading {
     opacity: 0.1;
     visibility: hidden;
   }
 }
 
-.ux-navbar {
-  position: fixed;
+.ux-menu-item {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 30px;
-  line-height: 30px;
-  background: #efefef;
-  border-bottom: 1px solid #666;
+  height: 50%;
+  background: url(/img/hubble.jpg) center top;
+  clip-path: url(/img/menu-triangle-down.svg);
+  clip-path: url(/img/triangle.svg);
+  mask: url(/img/triangle.svg);
+  -webkit-mask-box-image: url(/img/menu-triangle-down.svg);
 
-  .logo {
-    float: left;
-    padding-left: 20px;
+  .hover {
+    opacity: 0.5;
   }
 
-  .profile {
-    float: right;
-    padding-right: 20px;
-  }
-}
+  svg {
+    width: 100%;
+    height: 100%;
 
-.ux-reader {
-  width: @reader-width;
-  height: 100%;
-  overflow-y: auto;
-
-  item {
-    display: block;
-    padding: 20px;
-
-    &.on {
-      background: #eee;
+    polygon {
+      fill: transparent;
     }
-
-    .link {
-      display: block;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    author {
-      display: block;
-      color: #666;
-      font-size: 16px;
-    }
-    text {
-      display: block;
-      font-size: 16px;
-    }
-  }
-}
-
-.ux-composer {
-  @width: 300px;
-
-  position: absolute;
-  width: @width;
-  left: 50%;
-  margin-left: -(@width / 2);
-  background: white;
-
-  textarea {
-    display: block;
-    margin: 10px;
-  }
-
-  button {
-    margin: 0 10px 10px;
   }
 }

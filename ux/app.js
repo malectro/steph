@@ -69,6 +69,13 @@
     UX.app = new UX.View.App(UX.env);
     UX.app.render();
     Backbone.history.start({});
+
+    // TODO remove
+    $('svg polygon').on('mouseenter', function () {
+      console.log('in');
+    }).on('mouseleave', function () {
+      console.log('out');
+    });
   };
 
   require([

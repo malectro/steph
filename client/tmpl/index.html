@@ -26,19 +26,15 @@
   </head>
 
   <body class="loading">
-    <div class="ux-navbar">
-      <div class="logo">Read Club</div>
-      <div class="profile">
-        <% if (t.req.user) { %>
-          <span><%- t.req.user.username %></span>
-        <% } else { %>
-          <a href="/auth/twitter">log in</a>
-        <% } %>
-      </div>
-    </div>
 
-    <div class="ux-reader"></div>
-    <div class="ux-composer"></div>
+    <% _.each(['video', 'photo', 'radio', 'illustration'], function (medium) { %>
+      <div class="ux-menu-item" ux-menu="<%- medium %>">
+        <svg class="ux-menu-item-svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon points="50 100 100 0 0 0 "></polygon>
+        </svg>
+      </div>
+    <% }); %>
+
   </body>
 
 </html>
