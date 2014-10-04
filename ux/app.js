@@ -40,17 +40,21 @@
 
       this.router = new UX.Router();
 
-      // TODO move
-      $('.ux-menu-item').each(function (item) {
-        var $item = $(item);
+      var items = {};
+      _.each($('.ux-menu-item'), function (item) {
+        items[$(item).attr('ux-menu')] = $(item);
+      });
 
-        $item.find('polygon').on('mouseover', function () {
-          $item.addClass('hover');
-        }).on('mouseout', function () {
-          $item.removeClass('hover');
-        }).on('click', function () {
-          console.log('clicked item');
-        });
+      $('polygon').on('click', function () {
+        var menuType = $(this).attr('ux-menu');
+        console.log('click');
+        $('.ux-menu-item[ux-menu=' + menuType + ']').click();
+      }).on('mouseover', function () {
+        var menuType = $(this).attr('ux-menu');
+        items[menuType].addClass('hover');
+      }).on('mouseout', function () {
+        var menuType = $(this).attr('ux-menu');
+        items[menuType].removeClass('hover');
       });
 
       console.log('initialized main view');
