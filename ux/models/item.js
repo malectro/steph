@@ -5,7 +5,7 @@
     idAttribute: '_id',
 
     author: function () {
-      return UX.app.users.get(this.get('item'));
+      return UX.app.users.get(this.get('user'));
     },
 
     author_name: function () {

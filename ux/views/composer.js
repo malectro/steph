@@ -48,6 +48,7 @@
 
       this.item = new UX.Model.Item({
         text: form.text.value,
+        link: form.link.value,
         user_id: this.user.id
       });
 
