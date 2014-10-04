@@ -7,14 +7,15 @@ var User = exports;
 
 
 var Schema = User.Schema = mongoose.Schema({
-  twitter_id: Number,
   username: String,
   name: String,
   email: String,
   image_url: String,
   token: String,
   token_ts: Date,
-  ability: {type: Number, default: 9}
+  ability: {type: Number, default: 9},
+  auth_twitter: {type: mongoose.Schema.Types.ObjectId, ref: 'AuthTwitter'},
+  auth_local: {type: mongoose.Schema.Types.ObjectId, ref: 'AuthLocal'},
 });
 
 Schema.index({username: 1}, {unique: true});
@@ -37,10 +38,6 @@ _.extend(Schema.statics, {
     }, function (error, user) {
       callback(error, user);
     });
-  },
-
-  findByTwitterId: function (twitterId, callback) {
-    return this.findOne({twitter_id: twitterId}, callback);
   },
 
   // if the user is successfully authed with a token, a new token is generated.
@@ -91,7 +88,7 @@ _.extend(Schema.methods, {
 
   publicJSON: function () {
     return {
-      id: this.id,
+      _id: this.id,
       username: this.username
     };
   }

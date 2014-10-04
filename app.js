@@ -8,6 +8,7 @@ var _ = require(__dirname + '/util/wonderscore.js');
 var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var assetManager = require('connect-assetmanager');
 var fs = require('fs');
@@ -25,7 +26,7 @@ if (_.isUndefined(process)) {
   var process = {env: env};
 }
 var PORT = process.env.PORT || 3000;
-var TITLE = 'TheNews';
+var TITLE = 'Steph';
 
 
 // app
@@ -96,17 +97,32 @@ App.init = function () {
 App.setUpAuth = function () {
 
   // creates a User in the db with info from twitter.
-  function addTwitterUser(twitterUser) {
-    var params = {
+  function addTwitterUser(twitterUser, done) {
+    done = done || _.noop;
+    return addUser({
+      username: twitterUser.username,
+      name: twitterUser.displayName,
+      image_url: twitterUser._json.profile_image_url,
+      ability: 9
+    }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      var twitterAuth = new Model.AuthTwitter({
         twitter_id: twitterUser.id,
         username: twitterUser.username,
-        name: twitterUser.displayName,
+        display_name: twitterUser.displayName,
         image_url: twitterUser._json.profile_image_url,
-        ability: 9
-      },
-      newUser = new Model.User(params);
+        user: user,
+      });
+      twitterAuth.save(done);
+    });
+  }
 
-    newUser.save();
+  function addUser(userParams, done) {
+    done = done || _.noop;
+    var newUser = new Model.User(userParams);
+    newUser.save(done);
     return newUser;
   }
 
@@ -119,6 +135,11 @@ App.setUpAuth = function () {
     Model.User.findById(id, done);
   });
 
+  // initialize local authentication via passport.
+  passport.use(new LocalStrategy(function (username, password, done) {
+
+  }));
+
   // initialize twitter authentication via passport.
   passport.use(new TwitterStrategy({
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -126,14 +147,18 @@ App.setUpAuth = function () {
       callbackURL: '/auth/twitter/callback'
     },
     function (token, tokenSecret, twitterUser, done) {
-      Model.User.findByTwitterId(twitterUser.id, function (err, user) {
+      Model.AuthTwitter.findOne({twitter_id: twitterUser.id}).populate('user').exec(function (err, auth) {
         if (err) {
           // Error handling.
           return done(err);
         }
-        if (!user) {
+
+        var user;
+        if (!auth) {
           // User with this twitter Id doesn't exist.
           user = addTwitterUser(twitterUser);
+        } else {
+          user = auth.user;
         }
 
         user.generateToken(twitterUser, function (error) {
@@ -268,6 +293,7 @@ App.routes = function () {
       } else {
         var item = new Model.Item({
           user: req.user,
+          link: req.body.link,
           text: req.body.text
         })
 

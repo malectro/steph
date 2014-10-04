@@ -8,6 +8,7 @@
     "mongoose": "3.5.x",
     "express": "4.x",
     "passport": "x",
+    "passport-local": "x",
     "passport-twitter": "x",
     "consolidate": "0.4.x",
     "connect-assetmanager": "0.x",

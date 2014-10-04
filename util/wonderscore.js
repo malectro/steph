@@ -21,6 +21,7 @@
 
   Underscore.extend(_, Underscore);
 
+
   /**
    * defaultList
    * useful for allowing parameters to either be lists or single objects.
@@ -64,6 +65,19 @@
    */
   _.capitalize = function (string) {
     return string[0].toUpperCase() + string.substr(1);
+  };
+
+
+  /**
+   * snakeCase
+   * returns a snake case version of a string
+   * ex. var snakeString = _.snakeCase('MyClass');
+   *     snakeString === 'my_class';
+   */
+  _.snakeCase = function (string) {
+    return string.replace(/[A-Z]/g, function (letter) {
+      return '_' + letter.toLowerCase();
+    }).substr(1);
   };
 
 }).call(this);

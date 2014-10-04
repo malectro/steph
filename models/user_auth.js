@@ -1,9 +1,11 @@
+var _ = require(__dirname + '/../util/wonderscore.js');
+var mongoose = require('mongoose');
 
 var UserAuth = exports;
 UserAuth.Schemas = {};
 
 
-var Twitter = UserAuth.Schemas.Twitter = mongoose.Schema({
+var Twitter = UserAuth.Schemas.AuthTwitter = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   twitter_id: Number,
   username: String,
@@ -15,7 +17,7 @@ Twitter.index({twitter_id: 1}, {unique: true});
 Twitter.index({user: 1});
 
 
-var Local = UserAuth.Schemas.Local = mongoose.Schema({
+var Local = UserAuth.Schemas.AuthLocal = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   password: String,
 });

@@ -5,12 +5,20 @@ var Model = exports;
 
 var models = [
   'User',
+  'UserAuth',
   'Item',
   'Comment',
 ];
 
 _.each(models, function (model) {
-  Schema[model] = require(__dirname + '/' + model.toLowerCase() + '.js').Schema;
+  var module = require(__dirname + '/' + _.snakeCase(model) + '.js');
+  var schemas = module.Schemas;
+
+  if (!schemas) {
+    Schema[model] = module.Schema;
+  } else {
+    _.extend(Schema, schemas);
+  }
 });
 
 Model.init = function (db) {
