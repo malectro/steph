@@ -40,6 +40,19 @@
 
       this.router = new UX.Router();
 
+      // TODO move
+      $('.ux-menu-item').each(function (item) {
+        var $item = $(item);
+
+        $item.find('polygon').on('mouseover', function () {
+          $item.addClass('hover');
+        }).on('mouseout', function () {
+          $item.removeClass('hover');
+        }).on('click', function () {
+          console.log('clicked item');
+        });
+      });
+
       console.log('initialized main view');
     },
 
@@ -69,13 +82,6 @@
     UX.app = new UX.View.App(UX.env);
     UX.app.render();
     Backbone.history.start({});
-
-    // TODO remove
-    $('svg polygon').on('mouseenter', function () {
-      console.log('in');
-    }).on('mouseleave', function () {
-      console.log('out');
-    });
   };
 
   require([

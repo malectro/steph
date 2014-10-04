@@ -27,10 +27,11 @@
 
   <body class="loading">
 
-    <% _.each(['video', 'photo', 'radio', 'illustration'], function (medium) { %>
+    <% _.each(['video', 'photo', 'illustration', 'radio'], function (medium, i) { %>
       <div class="ux-menu-item" ux-menu="<%- medium %>">
-        <svg class="ux-menu-item-svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <polygon points="50 100 100 0 0 0 "></polygon>
+        <div class="ux-menu-item-bg"></div>
+        <svg class="ux-menu-item-svg ux-menu-item-svg-<%- medium %>" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon points="50 100 100 0 0 0 " transform="rotate(<%- 90 * i %>, 50, 50)"></polygon>
         </svg>
       </div>
     <% }); %>
