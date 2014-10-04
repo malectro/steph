@@ -57,6 +57,10 @@
         items[menuType].removeClass('hover');
       });
 
+      $('.ux-intro-name').on('click', function () {
+        $('.ux-intro-bg').addClass('hidden');
+      });
+
       console.log('initialized main view');
     },
 
