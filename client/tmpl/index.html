@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Read Club</title>
+    <title>Stephanie Foo</title>
 
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet/less" href="/less/app.less">
@@ -28,22 +28,7 @@
 
   <body class="loading">
 
-    <% _.each(['video', 'photo', 'illustration', 'radio'], function (medium, i) { %>
-      <div class="ux-menu-item" ux-menu="<%- medium %>">
-        <div class="ux-menu-item-bg"></div>
-        <div class="ux-menu-item-text"><%- medium %></div>
-      </div>
-    <% }); %>
-
-    <svg class="ux-menu-item-svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <% _.each(['video', 'photo', 'illustration', 'radio'], function (medium, i) { %>
-        <polygon class="ux-menu-item-svg" ux-menu="<%- medium %>" points="50 50 100 0 0 0 " transform="rotate(<%- 90 * i %>, 50, 50)"></polygon>
-      <% }); %>
-    </svg>
-
-    <div class="ux-intro-bg">
-      <div class="ux-intro-name">Stephanie Foo</div>
-    </div>
+    <div class="ux-home"><%= t._partial('home', t) %></div>
 
   </body>
 

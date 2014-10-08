@@ -252,6 +252,12 @@ App.routes = function () {
     });
   });
 
+  app.get('/:medium', function (req, res) {
+    Model.Item.find({medium: req.params.medium}).exec(function (error, items) {
+
+    });
+  });
+
   // auth
   app.get('/auth/twitter', passport.authenticate('twitter'));
   app.get('/logout', function (req, res) {

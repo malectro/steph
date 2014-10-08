@@ -22,54 +22,25 @@
   UX.View.App = Backbone.View.extend({
 
     initialize: function (options) {
+      // collections
       this.user = new UX.Model.User(options.user);
       this.users = new UX.List.Users(options.users);
       this.items = new UX.List.Items(options.items);
 
-      if (this.user.id) {
-        this.composer = new UX.View.Composer({
-          user: this.user,
-          items: this.items
-        });
-      }
-
-      this.reader = new UX.View.Reader({
-        user: this.user,
-        items: this.items
+      // views
+      this.home = new UX.View.Home({
+        media: options.media
       });
 
+      // router
       this.router = new UX.Router();
-
-      var items = {};
-      _.each($('.ux-menu-item'), function (item) {
-        items[$(item).attr('ux-menu')] = $(item);
-      });
-
-      $('polygon').on('click', function () {
-        var menuType = $(this).attr('ux-menu');
-        console.log('click');
-        $('.ux-menu-item[ux-menu=' + menuType + ']').click();
-      }).on('mouseover', function () {
-        var menuType = $(this).attr('ux-menu');
-        items[menuType].addClass('hover');
-      }).on('mouseout', function () {
-        var menuType = $(this).attr('ux-menu');
-        items[menuType].removeClass('hover');
-      });
-
-      $('.ux-intro-name').on('click', function () {
-        $('.ux-intro-bg').addClass('hidden');
-      });
 
       console.log('initialized main view');
     },
 
     render: function () {
-      if (this.composer) {
-        this.composer.setElement(this.$('.ux-composer')).render().show();
-      }
-      this.reader.setElement(this.$('.ux-reader')).render();
-
+      // already rendered by server
+      this.home.setElement(this.$('.ux-home'));
       this.$el.removeClass('loading');
     }
 
@@ -77,10 +48,23 @@
 
   UX.Router = Backbone.Router.extend({
     routes: {
-      'item/:id': 'showItem'
+      '': 'home',
+      ':medium': 'showMediums',
+      ':medium/:id': 'showItem',
     },
 
-    showItem: function (id) {
+    home: function () {
+
+    },
+
+    showMedium: function (medium) {
+      UX.session.set({
+        medium: medium,
+        itemId: null,
+      });
+    },
+
+    showItem: function (medium, id) {
       UX.session.set('itemId', id);
     }
   });
@@ -95,8 +79,7 @@
   require([
     'ux/models/user',
     'ux/models/item',
-    'ux/views/composer',
-    'ux/views/reader'
+    'ux/views/home',
   ], false, UX.init);
 
 }).call(this);
