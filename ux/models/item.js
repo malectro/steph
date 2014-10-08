@@ -4,21 +4,15 @@
 
     idAttribute: '_id',
 
-    author: function () {
-      return UX.app.users.get(this.get('user'));
+    url: function () {
+      return '/' + this.get('medium') + '/' + this.id
     },
-
-    author_name: function () {
-      var author = this.author();
-      return (author) ? author.get('username') : 'unknown';
-    }
 
   });
 
   var Items = UX.List.Items = Backbone.Collection.extend({
 
-    model: Item,
-    url: '/items'
+    model: Item
 
   });
 

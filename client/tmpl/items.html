@@ -1,0 +1,18 @@
+<div class="ux-items-title">Stephanie Foo</div>
+<div class="ux-items-medium"><%- t.medium %></div>
+
+<% if (t.mainItem) { %>
+  <div class="ux-item-current">
+    <img src="<%- t.mainItem.get('src') %>">
+  </div>
+<% } %>
+
+<div class="ux-items-list">
+  <% _.each(t.items, function (item) { %>
+    <div class="ux-item-thumb">
+      <a href="<%- item.url() %>">
+        <img src="<%- item.get('src') %>">
+      </a>
+    </div>
+  <% }); %>
+</div>

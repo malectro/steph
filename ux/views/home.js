@@ -16,14 +16,21 @@
       return this;
     },
 
+    show: function () {
+      this.$el.removeClass('hidden');
+    },
+
+    hide: function () {
+      this.$el.addClass('hidden');
+    },
+
     clickIntro: function (event) {
       this.$('.ux-intro-bg').addClass('hidden');
     },
 
     clickMenuItem: function (event) {
       var menuType = $(event.target).attr('ux-menu');
-      console.log('click');
-      this.$('.ux-menu-item[ux-menu=' + menuType + ']').click();
+      UX.app.router.navigate('/' + menuType, {trigger: true});
     },
 
     mouseenterPolygon: function (event) {
