@@ -9,10 +9,8 @@
 
 <div class="ux-items-list">
   <% _.each(t.items, function (item) { %>
-    <div class="ux-item-thumb">
-      <a href="<%- item.url() %>">
-        <img src="<%- item.get('src') %>">
-      </a>
-    </div>
+    <a href="<%- item.url() %>">
+      <span class="ux-item-thumb" style="background-image: url(<%- item.get('src') %>)"></span>
+    </a>
   <% }); %>
 </div>
