@@ -5,7 +5,7 @@
     idAttribute: '_id',
 
     url: function () {
-      return '/' + this.get('medium') + '/' + this.id
+      return this.get('medium') + '/' + this.id
     },
 
   });

@@ -30,7 +30,7 @@
 
     clickMenuItem: function (event) {
       var menuType = $(event.target).attr('ux-menu');
-      UX.app.router.navigate('/' + menuType, {trigger: true});
+      UX.app.router.navigate(menuType, {trigger: true});
     },
 
     mouseenterPolygon: function (event) {

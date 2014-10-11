@@ -19,13 +19,17 @@
   UX.List = {};
 
   var fakeItems = [
-    {src: '/img/hubble.jpg'},
-    {src: '/img/hubble.jpg'},
-    {src: '/img/hubble.jpg'},
+    {_id: 1, src: '/img/hubble.jpg', medium: 'photo'},
+    {_id: 2, src: '/img/hubble.jpg', medium: 'photo'},
+    {_id: 3, src: '/img/hubble.jpg', medium: 'photo'},
   ];
 
 
   UX.View.App = Backbone.View.extend({
+
+    events: {
+      'click a[href]': 'route',
+    },
 
     initialize: function (options) {
       // collections
@@ -60,6 +64,14 @@
       this.home.setElement(this.$('.ux-home'));
       this.itemsView.setElement(this.$('.ux-items'));
       this.$el.removeClass('loading');
+    },
+
+    route: function (event) {
+      var url = $(event.currentTarget).attr('href');
+      if (url.charAt(0) === '/') {
+        event.preventDefault();
+        this.router.navigate(url.slice(1), {trigger: true});
+      }
     },
 
     changeMedium: function (session, medium) {
@@ -104,7 +116,7 @@
     UX.session = new Backbone.Model();
     UX.app = new UX.View.App(UX.env);
     UX.app.render();
-    Backbone.history.start({});
+    Backbone.history.start({pushState: true});
   };
 
   require([
