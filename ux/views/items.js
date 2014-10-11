@@ -10,9 +10,18 @@
     },
 
     render: function () {
+      var mainItem,
+          itemId = this.session.get('itemId');
+
+      if (itemId) {
+        mainItem = this.items.get(itemId);
+      } else {
+        mainItem = this.items.at(0);
+      }
+
       this.$el.html(Tmpl.items({
         medium: this.session.get('medium'),
-        mainItem: this.items.at(0),
+        mainItem: mainItem,
         items: this.items.slice(),
       }));
       return this;

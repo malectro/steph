@@ -53,8 +53,7 @@
       // router
       this.router = new UX.Router();
 
-      UX.session.on('change:medium', this.changeMedium, this)
-        .on('change:itemId', this.changeItem, this);
+      UX.session.on('change:medium', this.changeMedium, this);
 
       console.log('initialized main view');
     },
@@ -90,7 +89,7 @@
     routes: {
       '': 'home',
       ':medium': 'showMedium',
-      ':medium/:id': 'showItem',
+      ':medium/:itemId': 'showItem',
     },
 
     home: function () {
@@ -107,8 +106,11 @@
       });
     },
 
-    showItem: function (medium, id) {
-      UX.session.set('itemId', id);
+    showItem: function (medium, itemId) {
+      UX.session.set({
+        medium: medium,
+        itemId: itemId,
+      });
     }
   });
 
