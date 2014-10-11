@@ -11,18 +11,20 @@
 
     render: function () {
       var mainItem,
-          itemId = this.session.get('itemId');
+          medium = this.session.get('medium'),
+          itemId = this.session.get('itemId'),
+          items = this.items.where({medium: medium});
 
       if (itemId) {
         mainItem = this.items.get(itemId);
       } else {
-        mainItem = this.items.at(0);
+        mainItem = items[0];
       }
 
       this.$el.html(Tmpl.items({
-        medium: this.session.get('medium'),
+        medium: medium,
         mainItem: mainItem,
-        items: this.items.slice(),
+        items: items,
       }));
       return this;
     },

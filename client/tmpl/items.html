@@ -1,9 +1,15 @@
-<div class="ux-items-title">Stephanie Foo</div>
+<div class="ux-items-title">
+  <a href="/">Stephanie Foo</a>
+</div>
 <div class="ux-items-medium"><%- t.medium %></div>
 
 <% if (t.mainItem) { %>
   <div class="ux-item-current">
-    <img src="<%- t.mainItem.get('src') %>">
+    <% if (t.mainItem.get('medium') === 'photo') { %>
+      <img src="<%- t.mainItem.get('src') %>">
+    <% } else if (t.mainItem.get('medium') === 'radio') { %>
+      <%= t.mainItem.embedHtml() %>
+    <% } %>
   </div>
 <% } %>
 
