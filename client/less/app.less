@@ -154,4 +154,44 @@ body {
     display: none;
   }
 }
+  .ux-items-title {
+    height: 120px - 48px;
+    padding: 48px 62px 0;
+    font-size: 36px;
+    text-transform: uppercase;
+  }
+
+  .ux-items-medium {
+    display: inline-block;
+    vertical-align: top;
+    width: 164px;
+    padding: 0 0 0 62px;
+    font-size: 26px;
+    text-transform: uppercase;
+  }
+
+  .ux-item-current {
+    display: none;
+  }
+
+  @thumb-width: 80px;
+  @thumb-height: 70px;
+  @thumb-margin: 14px;
+  .ux-items-list {
+    float: right;
+    width: @thumb-width * 3 + @thumb-margin * 3;
+    padding: 0 (62px - @thumb-margin) 0 0;
+    font-size: 0;
+  }
+    .ux-item-thumb {
+      display: inline-block;
+      width: @thumb-width;
+      height: @thumb-height;
+      margin: 0 @thumb-margin @thumb-margin 0;
+
+      img {
+        width: @thumb-width;
+        height: @thumb-height;
+      }
+    }
 
