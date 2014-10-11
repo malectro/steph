@@ -20,8 +20,8 @@
 
   var fakeItems = [
     {_id: 1, src: '/img/hubble.jpg', medium: 'photo'},
-    {_id: 2, src: '/img/hubble.jpg', medium: 'photo'},
-    {_id: 3, src: '/img/hubble.jpg', medium: 'photo'},
+    {_id: 2, src: '/img/hubble2.jpg', medium: 'photo'},
+    {_id: 3, src: '/img/hubble3.jpg', medium: 'photo'},
   ];
 
 
@@ -120,10 +120,10 @@
   };
 
   require([
-    'ux/models/user',
-    'ux/models/item',
-    'ux/views/home',
-    'ux/views/items',
+    '/ux/models/user',
+    '/ux/models/item',
+    '/ux/views/home',
+    '/ux/views/items',
   ], false, UX.init);
 
 }).call(this);

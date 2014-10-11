@@ -252,9 +252,39 @@ App.routes = function () {
     });
   });
 
+  // medium
   app.get('/:medium', function (req, res) {
-    Model.Item.find({medium: req.params.medium}).exec(function (error, items) {
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('index', context);
+    });
 
+    Model.User.find().exec(function (error, users) {
+      context.users = _.invoke(users, 'publicJSON');
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
+    });
+  });
+
+  // item
+  app.get('/:medium/:itemId', function (req, res) {
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('index', context);
+    });
+
+    Model.User.find().exec(function (error, users) {
+      context.users = _.invoke(users, 'publicJSON');
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
     });
   });
 
