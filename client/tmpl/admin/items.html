@@ -1,0 +1,34 @@
+<div class="ux-items-title">
+  <a href="/">Stephanie Foo</a>
+</div>
+
+<button class="ux-items-new">new +</button>
+
+<div class="ux-items-list">
+  <% _.each(t.items, function (item) { %>
+    <div class="ux-item">
+      <form class="ux-item-form" data-id="<%- item.id %>">
+
+        <div>title</div>
+        <input type="text" name="title" value="<%- item.get('title') %>">
+
+        <div>writeup</div>
+        <input type="text" name="writeup" value="<%- item.get('writeup') %>">
+
+        <div>src</div>
+        <input type="text" name="src" value="<%- item.get('src') %>">
+
+        <div>medium</div>
+        <select name="medium">
+          <% _.each(['video', 'photo', 'illustration', 'radio'], function (medium) { %>
+            <option<% if (medium === item.get('medium')) { %> selected<% } %>><%- medium %></option>
+          <% }); %>
+        </select>
+
+        <button class="submit">save</button>
+      </form>
+    </div>
+  <% }); %>
+</div>
+
+

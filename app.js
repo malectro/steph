@@ -391,7 +391,7 @@ App.compileTemplateDir = function (templateDir) {
 };
 
 App.templateEngine = function (path, options, callback) {
-  var name = path.split('/').pop().split('.')[0];
+  var name = path.replace(App.TMPL_ROOT + '/', '').split('.')[0];
   callback(null, App._partial(name, options));
 };
 
