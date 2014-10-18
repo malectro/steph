@@ -22,7 +22,7 @@
     {_id: 1, src: '/img/hubble.jpg', medium: 'photo'},
     {_id: 2, src: '/img/hubble2.jpg', medium: 'photo'},
     {_id: 3, src: '/img/hubble3.jpg', medium: 'photo'},
-    {_id: 4, src: 'https://soundcloud.com/malectro/surf-air', medium: 'radio'},
+    {_id: 4, src: 'https://soundcloud.com/malectro/surf-air', medium: 'radio', title: 'Surf Air', writeup: 'This is a writeup.'},
   ];
 
 

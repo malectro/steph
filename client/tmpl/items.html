@@ -10,6 +10,13 @@
     <% } else if (t.mainItem.get('medium') === 'radio') { %>
       <%= t.mainItem.embedHtml() %>
     <% } %>
+
+    <% if (t.mainItem.has('title')) { %>
+      <div class="ux-item-title"><%- t.mainItem.get('title') %></div>
+    <% } %>
+    <% if (t.mainItem.has('writeup')) { %>
+      <div class="ux-item-writeup"><%- t.mainItem.get('writeup') %></div>
+    <% } %>
   </div>
 <% } %>
 
