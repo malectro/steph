@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stephanie Foo</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet/less" href="/less/admin/app.less">
+
+    <script src="/util/less.js"></script>
+    <script src="/util/underscore.js"></script>
+    <script src="/util/wonderscore.js"></script>
+    <script src="/util/zepto.js"></script>
+    <script src="/util/backbone.js"></script>
+    <script src="/util/require.js"></script>
+    <script src="/tmpl/tmpl.js"></script>
+    <script src="/ux/admin/app.js"></script>
+
+    <script>
+      UX.env = {
+        el: 'body',
+        user: <%= JSON.stringify(t.req.user || null) %>,
+        users: <%= JSON.stringify(t.users) %>,
+        items: <%= JSON.stringify(t.items) %>
+      };
+    </script>
+
+  </head>
+
+  <body class="loading">
+
+    <div class="ux-items"></div>
+
+  </body>
+
+</html>
+

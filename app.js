@@ -51,7 +51,7 @@ App.init = function () {
     set('view engine', 'html').
 
     // index folder
-    set('views', __dirname + '/client/views').
+    set('views', __dirname + '/client/tmpl').
 
     // static files
     use('/ux', express.static(__dirname + '/ux')).
@@ -230,7 +230,7 @@ App.routes = function () {
 
   app.get('/admin', function (req, res) {
     if (!req.user || !req.user.can('admin')) {
-      res.redirect('/');
+      return res.redirect('/auth/twitter');
     }
 
     var context = {req: req};
@@ -251,42 +251,6 @@ App.routes = function () {
 
   // home
   app.get('/', function (req, res) {
-    var context = {req: req};
-    var done = _.after(2, function () {
-      res.render('index', context);
-    });
-
-    Model.User.find().exec(function (error, users) {
-      context.users = _.invoke(users, 'publicJSON');
-      done();
-    });
-
-    Model.Item.find().exec(function (error, items) {
-      context.items = items;
-      done();
-    });
-  });
-
-  // medium
-  app.get('/:medium', function (req, res) {
-    var context = {req: req};
-    var done = _.after(2, function () {
-      res.render('index', context);
-    });
-
-    Model.User.find().exec(function (error, users) {
-      context.users = _.invoke(users, 'publicJSON');
-      done();
-    });
-
-    Model.Item.find().exec(function (error, items) {
-      context.items = items;
-      done();
-    });
-  });
-
-  // item
-  app.get('/:medium/:itemId', function (req, res) {
     var context = {req: req};
     var done = _.after(2, function () {
       res.render('index', context);
@@ -358,6 +322,41 @@ App.routes = function () {
       }
     });
 
+  // medium
+  app.get('/:medium', function (req, res) {
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('index', context);
+    });
+
+    Model.User.find().exec(function (error, users) {
+      context.users = _.invoke(users, 'publicJSON');
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
+    });
+  });
+
+  // item
+  app.get('/:medium/:itemId', function (req, res) {
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('index', context);
+    });
+
+    Model.User.find().exec(function (error, users) {
+      context.users = _.invoke(users, 'publicJSON');
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
+    });
+  });
 };
 
 

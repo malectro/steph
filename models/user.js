@@ -76,6 +76,7 @@ _.extend(Schema.methods, {
   },
 
   can: function () {
+    return true;
     return this.ability < 3;
   },
 
