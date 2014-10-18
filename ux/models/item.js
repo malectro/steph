@@ -4,6 +4,10 @@
 
     idAttribute: '_id',
 
+    initialize: function () {
+      this.attributes.createdAt = this.attributes.createdAt || new Date() - 0;
+    },
+
     url: function () {
       return this.get('medium') + '/' + this.id
     },
@@ -42,7 +46,11 @@
 
   var Items = UX.List.Items = Backbone.Collection.extend({
 
-    model: Item
+    model: Item,
+
+    comparator: function (item) {
+      return -item.get('createdAt');
+    },
 
   });
 

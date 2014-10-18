@@ -5,9 +5,9 @@
 <button class="ux-items-new">new +</button>
 
 <div class="ux-items-list">
-  <% _.each(t.items, function (item) { %>
+  <% t.items.each(function (item) { %>
     <div class="ux-item">
-      <form class="ux-item-form" data-id="<%- item.id %>">
+      <form class="ux-item-form" data-cid="<%- item.cid %>">
 
         <div>title</div>
         <input type="text" name="title" value="<%- item.get('title') %>">
