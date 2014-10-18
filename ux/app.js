@@ -42,6 +42,10 @@
       this.items = new UX.List.Items(fakeItems);
 
       // views
+      this.home = new UX.View.Home({
+        media: options.media,
+        session: UX.session,
+      });
       this.itemsView = new UX.View.Items({
         session: UX.session,
         items: this.items,
@@ -50,13 +54,14 @@
       // router
       this.router = new UX.Router();
 
-      //UX.session.on('change:medium', this.changeMedium, this);
+      UX.session.on('change:medium', this.changeMedium, this);
 
       console.log('initialized main view');
     },
 
     render: function () {
       // already rendered by server
+      this.home.setElement(this.$('.ux-home'));
       this.itemsView.setElement(this.$('.ux-items'));
       this.$el.removeClass('loading');
     },
@@ -84,6 +89,8 @@
   UX.Router = Backbone.Router.extend({
     routes: {
       '': 'home',
+      ':medium': 'showMedium',
+      ':medium/:itemId': 'showItem',
     },
 
     home: function () {
@@ -118,7 +125,8 @@
   require([
     '/ux/models/user',
     '/ux/models/item',
-    '/ux/admin/views/items',
+    '/ux/views/home',
+    '/ux/views/items',
   ], false, UX.init);
 
 }).call(this);
