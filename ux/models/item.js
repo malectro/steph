@@ -3,12 +3,13 @@
   var Item = UX.Model.Item = Backbone.Model.extend({
 
     idAttribute: '_id',
+    urlRoot: '/items',
 
     initialize: function () {
       this.attributes.createdAt = this.attributes.createdAt || new Date() - 0;
     },
 
-    url: function () {
+    linkUrl: function () {
       return this.get('medium') + '/' + this.id
     },
 
@@ -47,6 +48,7 @@
   var Items = UX.List.Items = Backbone.Collection.extend({
 
     model: Item,
+    url: '/items',
 
     comparator: function (item) {
       return -item.get('createdAt');

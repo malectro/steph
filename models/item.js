@@ -7,8 +7,11 @@ var Item = exports;
 
 var Schema = Item.Schema = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  link: String,
-  text: String,
+  title: String,
+  writeup: String,
+  src: String,
+  medium: String,
+  createdAt: Date,
 });
 
 Schema.index({user: 1});

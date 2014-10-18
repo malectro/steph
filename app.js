@@ -314,10 +314,8 @@ App.routes = function () {
     post(function (req, res) {
       var error;
 
-      if (!req.user || req.user.id !== req.body.user_id) {
+      if (!req.user || req.user.id !== req.body.user_id || !req.user.can('admin')) {
         error = 'not allowed'
-      } else if (!req.body.text) {
-        error = 'requires text'
       }
 
       if (error) {
@@ -325,9 +323,12 @@ App.routes = function () {
       } else {
         var item = new Model.Item({
           user: req.user,
-          link: req.body.link,
-          text: req.body.text
-        })
+          title: req.body.title,
+          writeup: req.body.writeup,
+          src: req.body.src,
+          medium: req.body.medium,
+          createdAt: new Date(),
+        });
 
         item.save(function (error) {
           if (error) {
@@ -335,6 +336,66 @@ App.routes = function () {
           } else {
             res.json(200, item);
           }
+        });
+      }
+    });
+  app.route('/items/:id').
+    get(function (req, res) {
+      Model.Item.findById(req.params.id).exec(function (error, item) {
+        if (error) {
+          res.json(400, {error: error});
+        } else {
+          res.json(200, item);
+        }
+      });
+    }).
+    put(function (req, res) {
+      var error;
+
+      if (!req.user || req.user.id !== req.body.user || !req.user.can('admin')) {
+        error = 'not allowed'
+      }
+
+      if (error) {
+        res.json(400, {error: error});
+
+      } else {
+        Model.Item.findById(req.params.id).exec(function (error, item) {
+          item.set({
+            title: req.body.title,
+            writeup: req.body.writeup,
+            src: req.body.src,
+            medium: req.body.medium,
+          });
+          item.save(function (error) {
+            if (error) {
+              res.json(400, {error: error});
+            } else {
+              res.json(200, item);
+            }
+          });
+        });
+      }
+    }).
+    delete(function (req, res) {
+      var error;
+
+      if (!req.user || !req.user.can('admin')) {
+        error = 'not allowed'
+      }
+
+      if (error) {
+        res.json(400, {error: error});
+
+      } else {
+        Model.Item.findById(req.params.id).exec(function (error, item) {
+          item.remove(function (error) {
+            if (error) {
+              res.json(400, {error: error});
+            } else {
+              res.json(200, item);
+            }
+          });
         });
       }
     });

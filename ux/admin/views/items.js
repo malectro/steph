@@ -5,6 +5,7 @@
       'click .ux-items-new': '_click_new',
       'submit .ux-item-form': '_submit',
       'change .ux-item-form input': '_change_input',
+      'click .ux-item-delete': '_delete',
     },
 
     initialize: function (options) {
@@ -12,6 +13,7 @@
       this.items = options.items;
 
       this.items.on('add', this.render, this);
+      this.items.on('remove', this.render, this);
       this.session.on('change', this.render, this);
     },
 
@@ -31,7 +33,9 @@
     },
 
     _click_new: function () {
-      this.items.add(new UX.Model.Item());
+      this.items.add(new UX.Model.Item({
+        user_id: UX.app.user.id
+      }));
     },
 
     _change_input: function (event) {
@@ -52,13 +56,20 @@
 
       console.log('saving', item.toJSON());
 
-      return;
-      item.save({
+      item.save({}, {
         success: function () {
           $form.find('button').prop('disabled', false);
         }
       });
-    }
+    },
+
+    _delete: function (event) {
+      event.preventDefault();
+      var $form = $(event.target).parent();
+      var cid = $form.data('cid');
+      var item = this.items.get(cid);
+      item.destroy();
+    },
 
   });
 
