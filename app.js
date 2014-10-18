@@ -57,19 +57,36 @@ App.init = function () {
     use('/ux', express.static(__dirname + '/ux')).
     use('/util', express.static(__dirname + '/util')).
     use('/less', express.static(__dirname + '/client/less')).
-    use('/img', express.static(__dirname + '/client/img')).
+    use('/img', express.static(__dirname + '/client/img'));
 
     // set template minifier.
-    use('/tmpl', assetManager({
+    app.use('/tmpl', assetManager({
       js: {
         route: /tmpl.js\.*/,
-        path: __dirname + '/client/tmpl/',
+        path: App.TMPL_ROOT + '/',
         dataType: 'javascript',
         files: ['*'],
         preManipulate: {
           '^': function (file, path, index, isLast, callback) {
-            var name = path.split('/').pop().split('.')[0];
-            callback(null, "Tmpl." + name + " = " + App._tmpls[name].source + ";\n");
+            var name = path.replace(App.TMPL_ROOT + '/', '').split('.')[0];
+            callback(null, "Tmpl['" + name + "'] = " + App._tmpls[name].source + ";\n");
+          }
+        },
+        postManipulate: {
+          '^': function (file, path, index, isLast, callback) {
+            callback(null, 'window.Tmpl=window.Tmpl||{};' + file);
+          }
+        }
+      },
+      adminJs: {
+        route: /admin.js\.*/,
+        path: App.TMPL_ROOT + '/admin/',
+        dataType: 'javascript',
+        files: ['*'],
+        preManipulate: {
+          '^': function (file, path, index, isLast, callback) {
+            var name = path.replace(App.TMPL_ROOT + '/', '').split('.')[0];
+            callback(null, "Tmpl['" + name + "'] = " + App._tmpls[name].source + ";\n");
           }
         },
         postManipulate: {

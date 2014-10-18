@@ -57,7 +57,7 @@
 
     render: function () {
       // already rendered by server
-      this.itemsView.setElement(this.$('.ux-items'));
+      this.itemsView.setElement(this.$('.ux-items')).render();
       this.$el.removeClass('loading');
     },
 
