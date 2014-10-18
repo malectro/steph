@@ -7,6 +7,7 @@
       this.items = options.items;
 
       this.session.on('change', this.render, this);
+      this.items.on('change:embed', this.render, this);
     },
 
     render: function () {

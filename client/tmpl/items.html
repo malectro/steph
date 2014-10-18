@@ -23,7 +23,7 @@
 <div class="ux-items-list">
   <% _.each(t.items, function (item) { %>
     <a href="/<%- item.url() %>">
-      <span class="ux-item-thumb" style="background-image: url(<%- item.get('src') %>)"></span>
+      <span class="ux-item-thumb" style="background-image: url(<%- item.thumbSrc() %>)"></span>
     </a>
   <% }); %>
 </div>
