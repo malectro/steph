@@ -39,7 +39,7 @@
       this.items = new UX.List.Items(options.items);
 
       // TODO: remove
-      this.items = new UX.List.Items(fakeItems);
+      //this.items = new UX.List.Items(fakeItems);
 
       // views
       this.home = new UX.View.Home({

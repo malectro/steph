@@ -26,6 +26,7 @@
         <textarea class="input" name="writeup"><%- item.get('writeup') %></textarea>
 
         <div>actions</div>
+        <a href="<%- item.linkUrl() %>" target="_blank">view</a>
         <button class="submit">save</button>
         <button class="ux-item-delete">delete</button>
       </form>

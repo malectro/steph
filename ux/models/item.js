@@ -5,8 +5,16 @@
     idAttribute: '_id',
     urlRoot: '/items',
 
-    initialize: function () {
+    defaults: {
+      medium: 'photo',
+    },
+
+    initialize: function (attributes) {
       this.attributes.createdAt = this.attributes.createdAt || new Date() - 0;
+      if (this.attributes.embed) {
+        this.attributes.embedHtml = this.attributes.embed.html;
+        this.attributes.thumb = this.attributes.embed.thumbnail_url;
+      }
     },
 
     linkUrl: function () {

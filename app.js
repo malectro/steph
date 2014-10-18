@@ -327,6 +327,7 @@ App.routes = function () {
           writeup: req.body.writeup,
           src: req.body.src,
           medium: req.body.medium,
+          embed: req.body.embed,
           createdAt: new Date(),
         });
 
@@ -366,6 +367,7 @@ App.routes = function () {
             writeup: req.body.writeup,
             src: req.body.src,
             medium: req.body.medium,
+            embed: req.body.embed,
           });
           item.save(function (error) {
             if (error) {

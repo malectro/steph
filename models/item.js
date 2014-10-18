@@ -11,6 +11,7 @@ var Schema = Item.Schema = mongoose.Schema({
   writeup: String,
   src: String,
   medium: String,
+  embed: Object,
   createdAt: Date,
 });
 

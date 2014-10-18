@@ -5,6 +5,7 @@
       'click .ux-items-new': '_click_new',
       'submit .ux-item-form': '_submit',
       'change .ux-item-form .input': '_change_input',
+      'change .input[name="src"]': '_change_src',
       'click .ux-item-delete': '_delete',
     },
 
@@ -44,6 +45,17 @@
       var cid = $(event.target.form).data('cid');
       var item = this.items.get(cid);
       item.set(attr, $input.val());
+    },
+
+    _change_input: function (event) {
+      var $input = $(event.target);
+      var attr = event.target.name;
+      var cid = $(event.target.form).data('cid');
+      var item = this.items.get(cid);
+
+      if (item.get('medium') === 'radio') {
+        item.embedHtml();
+      }
     },
 
     _submit: function (event) {
