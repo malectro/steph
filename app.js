@@ -42,13 +42,7 @@ App.init = function () {
   _.templateSettings.variable = 't';
 
   // compile templates
-  fs.readdir(__dirname + '/client/tmpl', function (err, files) {
-    files.forEach(function (file) {
-      fs.readFile(__dirname + '/client/tmpl/' + file, function (err, data) {
-        App._tmpls[file.split('.')[0]] = _.template(data.toString());
-      });
-    });
-  });
+  App.compileTemplateDir('');
 
   app.set('title', TITLE).
 
@@ -234,6 +228,27 @@ App.middleware = function () {
 // routes
 App.routes = function () {
 
+  app.get('/admin', function (req, res) {
+    if (!req.user || !req.user.can('admin')) {
+      res.redirect('/');
+    }
+
+    var context = {req: req};
+    var done = _.after(2, function () {
+      res.render('admin/index', context);
+    });
+
+    Model.User.find().exec(function (error, users) {
+      context.users = users;
+      done();
+    });
+
+    Model.Item.find().exec(function (error, items) {
+      context.items = items;
+      done();
+    });
+  });
+
   // home
   app.get('/', function (req, res) {
     var context = {req: req};
@@ -348,6 +363,33 @@ App.routes = function () {
 
 // templating
 App._tmpls = {};
+
+App.TMPL_ROOT = __dirname + '/client/tmpl';
+
+App.compileTemplateDir = function (templateDir) {
+
+  fs.readdir(App.TMPL_ROOT + templateDir, function (err, files) {
+    files.forEach(function (file) {
+
+      var filename = templateDir + '/' + file;
+
+      fs.readFile(App.TMPL_ROOT + filename, function (error, data) {
+        if (error) {
+          if (error.code === 'EISDIR') {
+            App.compileTemplateDir(filename);
+          } else {
+            console.log('Error compiling template file', filename, error);
+          }
+        } else {
+          App._tmpls[filename.split('.')[0].slice(1)] = _.template(data.toString());
+          console.log('Compiled template', filename.split('.')[0].slice(1));
+        }
+      });
+
+    });
+  });
+
+};
 
 App.templateEngine = function (path, options, callback) {
   var name = path.split('/').pop().split('.')[0];
