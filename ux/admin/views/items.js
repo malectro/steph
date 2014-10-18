@@ -4,7 +4,7 @@
     events: {
       'click .ux-items-new': '_click_new',
       'submit .ux-item-form': '_submit',
-      'change .ux-item-form input': '_change_input',
+      'change .ux-item-form .input': '_change_input',
       'click .ux-item-delete': '_delete',
     },
 

@@ -10,21 +10,22 @@
       <form class="ux-item-form" data-cid="<%- item.cid %>">
 
         <div>title</div>
-        <input type="text" name="title" value="<%- item.get('title') %>">
-
-        <div>writeup</div>
-        <input type="text" name="writeup" value="<%- item.get('writeup') %>">
-
-        <div>src</div>
-        <input type="text" name="src" value="<%- item.get('src') %>">
+        <input type="text" class="input" name="title" value="<%- item.get('title') %>">
 
         <div>medium</div>
-        <select name="medium">
+        <select class="input" name="medium">
           <% _.each(['video', 'photo', 'illustration', 'radio'], function (medium) { %>
             <option<% if (medium === item.get('medium')) { %> selected<% } %>><%- medium %></option>
           <% }); %>
         </select>
 
+        <div>src</div>
+        <input type="text" class="input" name="src" value="<%- item.get('src') %>">
+
+        <div>writeup</div>
+        <textarea class="input" name="writeup"><%- item.get('writeup') %></textarea>
+
+        <div>actions</div>
         <button class="submit">save</button>
         <button class="ux-item-delete">delete</button>
       </form>
