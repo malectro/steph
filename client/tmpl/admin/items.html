@@ -1,11 +1,14 @@
-<div class="ux-items-title">
-  <a href="/">Stephanie Foo</a>
+<div>Item Admin</div>
+<div class="ux-filters">
+  <% _.each(['all', 'photo', 'radio', 'illustration', 'video'], function (filter) { %>
+    <a<% if (t.session.get('filter') === filter) { %> class="on"<% } %> data-filter="<%- filter %>"><%- filter %></a>
+  <% }); %>
 </div>
 
 <button class="ux-items-new">new +</button>
 
 <div class="ux-items-list">
-  <% t.items.each(function (item) { %>
+  <% _.each(t.items, function (item) { %>
     <div class="ux-item">
       <form class="ux-item-form" data-cid="<%- item.cid %>">
 

@@ -7,11 +7,14 @@
       'change .ux-item-form .input': '_change_input',
       'change .input[name="src"]': '_change_src',
       'click .ux-item-delete': '_delete',
+      'click .ux-filters a': '_filter',
     },
 
     initialize: function (options) {
       this.session = options.session;
       this.items = options.items;
+
+      this.session.set('filter', 'all');
 
       this.items.on('add', this.render, this);
       this.items.on('remove', this.render, this);
@@ -19,9 +22,20 @@
     },
 
     render: function () {
+      var items;
+      var filter = this.session.get('filter');
+
+      if (filter !== 'all') {
+        items = this.items.where({medium: filter});
+      } else {
+        items = this.items.slice();
+      }
+
       this.$el.html(Tmpl['admin/items']({
-        items: this.items,
+        items: items,
+        session: this.session,
       }));
+
       return this;
     },
 
@@ -45,15 +59,17 @@
       var cid = $(event.target.form).data('cid');
       var item = this.items.get(cid);
       item.set(attr, $input.val());
+      console.log('changed', attr, item.get(attr));
     },
 
-    _change_input: function (event) {
+    _change_src: function (event) {
       var $input = $(event.target);
       var attr = event.target.name;
       var cid = $(event.target.form).data('cid');
       var item = this.items.get(cid);
+      console.log('embed');
 
-      if (item.get('medium') === 'radio') {
+      if (_.contains(['radio', 'video'], item.get('medium'))) {
         item.embedHtml();
       }
     },
@@ -81,6 +97,11 @@
       var cid = $form.data('cid');
       var item = this.items.get(cid);
       item.destroy();
+    },
+
+    _filter: function (event) {
+      var filter = $(event.target).data('filter');
+      this.session.set('filter', filter);
     },
 
   });

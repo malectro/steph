@@ -25,6 +25,15 @@
       return this.get('thumb') || this.get('src');
     },
 
+    embedUrl: function () {
+      var medium = this.get('medium');
+      var urls = {
+        radio: 'http://soundcloud.com/oembed',
+        video: 'http://vimeo.com/api/oembed.json',
+      };
+      return urls[medium];
+    },
+
     embedHtml: function () {
       var html;
 
@@ -33,12 +42,15 @@
 
       } else {
         var id = _.uniqueId('embed');
-        html = '<span id="' + id + '" class="ux-embed-soundcloud"></span>';
+        html = '<span id="' + id + '" class="ux-oembed"></span>';
 
         $.ajax({
-          url: 'http://soundcloud.com/oembed',
+          url: this.embedUrl(),
           dataType: 'jsonp',
-          data: {url: this.get('src'), format: 'js'},
+          data: {
+            url: this.get('src'),
+            format: 'js'
+          },
           success: _.bind(function (data) {
             this.set('embed', data);
             this.set('embedHtml', data.html);
@@ -59,7 +71,7 @@
     url: '/items',
 
     comparator: function (item) {
-      return -item.get('createdAt');
+      return new Date(item.get('createdAt')) * -1;
     },
 
   });

@@ -7,7 +7,7 @@
   <div class="ux-item-current">
     <% if (t.mainItem.get('medium') === 'photo') { %>
       <img src="<%- t.mainItem.get('src') %>">
-    <% } else if (t.mainItem.get('medium') === 'radio') { %>
+    <% } else if (_.contains(['radio', 'video'], t.mainItem.get('medium'))) { %>
       <%= t.mainItem.embedHtml() %>
     <% } %>
 
