@@ -250,7 +250,7 @@ App.routes = function () {
       return res.redirect('/auth/twitter');
     }
 
-    var context = {req: req};
+    var context = {req: req, env: process.env};
     var done = _.after(2, function () {
       res.render('admin/index', context);
     });

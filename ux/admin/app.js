@@ -50,6 +50,11 @@
       // router
       this.router = new UX.Router();
 
+      // aws
+      AWS.config.credentials = new AWS.Credentials(options.AWS_KEY, options.AWS_SECRET);
+      AWS.config.region = 'us-east-1';
+      this.bucket = new AWS.S3({params: {Bucket: 'stephaniefoo'}});
+
       //UX.session.on('change:medium', this.changeMedium, this);
 
       console.log('initialized main view');

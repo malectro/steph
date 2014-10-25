@@ -25,6 +25,11 @@
         <div>src</div>
         <input type="text" class="input" name="src" value="<%- item.get('src') %>">
 
+        <% if (_.contains(['photo', 'illustration'], item.get('medium'))) { %>
+          <div>upload new src file</div>
+          <input type="file" name="file">
+        <% } %>
+
         <div>writeup</div>
         <textarea class="input" name="writeup"><%- item.get('writeup') %></textarea>
 

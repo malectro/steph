@@ -11,6 +11,9 @@
     <script src="/util/wonderscore.js"></script>
     <script src="/util/zepto.js"></script>
     <script src="/util/backbone.js"></script>
+    <script src="/util/sha1.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc13.min.js"></script>
+
     <script src="/util/require.js"></script>
     <script src="/tmpl/admin.js"></script>
     <script src="/ux/admin/app.js"></script>
@@ -18,6 +21,8 @@
     <script>
       UX.env = {
         el: 'body',
+        AWS_KEY: <%= JSON.stringify(t.env.S3_ACCESS_KEY) %>,
+        AWS_SECRET: <%= JSON.stringify(t.env.S3_ACCESS_SECRET) %>,
         user: <%= JSON.stringify(t.req.user || null) %>,
         users: <%= JSON.stringify(t.users) %>,
         items: <%= JSON.stringify(t.items) %>
