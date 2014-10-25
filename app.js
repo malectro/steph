@@ -34,8 +34,6 @@ var TITLE = 'Steph';
 
 var Model = require(__dirname + '/models/models.js');
 
-console.log('proc', proc);
-
 
 // app
 var mongoUri = proc.env.MONGOLAB_URI || proc.env.MONGOHQ_URL || 'mongodb://localhost/' + TITLE.toLowerCase();
