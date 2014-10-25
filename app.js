@@ -17,10 +17,16 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+try {
+  var env = require(__dirname + '/env.js');
+} catch (error) {
+  if (error.code === 'MODULE_NOT_FOUND'){
+    console.log('No env.js found. Assuming production.');
+  }
+}
 
 // constants
-if (_.isUndefined(process) || !process.env) {
-  var env = require(__dirname + '/env.js');
+if (_.isUndefined(process) || !process) {
   var process = {env: env};
 }
 var PORT = process.env.PORT || 3000;
