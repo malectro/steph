@@ -19,7 +19,7 @@ var bodyParser = require('body-parser');
 
 
 // constants
-if (_.isUndefined(process)) {
+if (_.isUndefined(process) || !process.env) {
   var env = require(__dirname + '/env.js');
   var process = {env: env};
 }
