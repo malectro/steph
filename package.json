@@ -10,7 +10,7 @@
     "passport": "x",
     "passport-local": "x",
     "passport-twitter": "x",
-    "consolidate": "0.4.x",
+    "consolidate": "0.10.x",
     "connect-assetmanager": "0.x",
     "body-parser": "1.x",
     "cookie-parser": "1.x",
