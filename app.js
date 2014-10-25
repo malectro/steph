@@ -17,16 +17,16 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var env = require(__dirname + '/env.js');
-var Model = require(__dirname + '/models/models.js');
-
 
 // constants
 if (_.isUndefined(process)) {
+  var env = require(__dirname + '/env.js');
   var process = {env: env};
 }
 var PORT = process.env.PORT || 3000;
 var TITLE = 'Steph';
+
+var Model = require(__dirname + '/models/models.js');
 
 
 // app
