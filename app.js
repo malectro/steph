@@ -19,6 +19,7 @@ var bodyParser = require('body-parser');
 
 try {
   var env = require(__dirname + '/env.js');
+  var process = {env: env};
 } catch (error) {
   if (error.code === 'MODULE_NOT_FOUND'){
     console.log('No env.js found. Assuming production.');
@@ -26,9 +27,6 @@ try {
 }
 
 // constants
-if (_.isUndefined(process) || !process) {
-  var process = {env: env};
-}
 var PORT = process.env.PORT || 3000;
 var TITLE = 'Steph';
 
