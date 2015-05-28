@@ -321,7 +321,7 @@ App.routes = function () {
     post(function (req, res) {
       var error;
 
-      if (!req.user || req.user.id !== req.body.user_id || !req.user.can('admin')) {
+      if (!req.user || !req.user.can('admin')) {
         error = 'not allowed'
       }
 
@@ -360,7 +360,7 @@ App.routes = function () {
     put(function (req, res) {
       var error;
 
-      if (!req.user || req.user.id !== req.body.user || !req.user.can('admin')) {
+      if (!req.user || !req.user.can('admin')) {
         error = 'not allowed'
       }
 
