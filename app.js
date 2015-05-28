@@ -275,7 +275,10 @@ App.routes = function () {
 
   // home
   app.get('/', function (req, res) {
-    var context = {req: req};
+    var context = {
+      req: req,
+      media: ['listen', 'watch', 'about', 'see'],
+    };
     var done = _.after(2, function () {
       res.render('index', context);
     });

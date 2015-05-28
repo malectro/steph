@@ -1,5 +1,11 @@
 (function () {
 
+  var mediaToText = {
+    photo: 'see',
+    video: 'watch',
+    radio: 'listen',
+  };
+
   var Items = UX.View.Items = Backbone.View.extend({
 
     initialize: function (options) {
@@ -26,6 +32,7 @@
         medium: medium,
         mainItem: mainItem,
         items: items,
+        mediumText: mediaToText[medium],
       }));
 
       if (medium === 'video') {

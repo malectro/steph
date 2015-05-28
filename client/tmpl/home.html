@@ -1,12 +1,12 @@
-<% _.each(['video', 'photo', 'about', 'radio'], function (medium, i) { %>
-  <a class="ux-menu-item" ux-menu="<%- medium %>" href="/<%- medium %>">
+<% _.each(t.media, function (text, medium) { %>
+  <a class="ux-menu-item" ux-menu="<%- text %>" href="/<%- text %>">
     <div class="ux-menu-item-bg"></div>
-    <div class="ux-menu-item-text"><%- medium %></div>
+    <div class="ux-menu-item-text"><%- text %></div>
   </a>
 <% }); %>
 
 <svg class="ux-menu-item-svg" viewBox="0 0 100 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <% _.each(['video', 'photo', 'about', 'radio'], function (medium, i) { %>
+  <% _.each(t.media, function (medium, i) { %>
     <polygon class="ux-menu-item-svg" ux-menu="<%- medium %>" points="50 50 100 0 0 0 " transform="rotate(<%- 90 * i %>, 50, 50)"></polygon>
   <% }); %>
 </svg>

@@ -25,6 +25,13 @@
     {_id: 4, src: 'https://soundcloud.com/malectro/surf-air', medium: 'radio', title: 'Surf Air', writeup: 'This is a writeup.'},
   ];
 
+  var urlToMedia = {
+    watch: 'video',
+    listen: 'radio',
+    see: 'photo',
+    about: 'about',
+  };
+
 
   UX.View.App = Backbone.View.extend({
 
@@ -112,14 +119,14 @@
 
     showMedium: function (medium) {
       UX.session.set({
-        medium: medium,
+        medium: urlToMedia[medium],
         itemId: null,
       });
     },
 
     showItem: function (medium, itemId) {
       UX.session.set({
-        medium: medium,
+        medium: urlToMedia[medium],
         itemId: itemId,
       });
     }
