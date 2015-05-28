@@ -50,6 +50,9 @@
         session: UX.session,
         items: this.items,
       });
+      this.aboutView = new UX.View.About({
+        session: UX.session,
+      });
 
       // router
       this.router = new UX.Router();
@@ -63,6 +66,7 @@
       // already rendered by server
       this.home.setElement(this.$('.ux-home'));
       this.itemsView.setElement(this.$('.ux-items'));
+      this.aboutView.setElement(this.$('.ux-about'));
       this.$el.removeClass('loading');
     },
 
@@ -78,9 +82,15 @@
       if (!medium) {
         this.home.show();
         this.itemsView.hide();
+        this.aboutView.hide();
+      } else if (medium === 'about') {
+        this.aboutView.show();
+        this.home.hide();
+        this.itemsView.hide();
       } else {
         this.itemsView.show();
         this.home.hide();
+        this.aboutView.hide();
       }
     },
 
@@ -127,6 +137,7 @@
     '/ux/models/item',
     '/ux/views/home',
     '/ux/views/items',
+    '/ux/views/about',
   ], false, UX.init);
 
 }).call(this);

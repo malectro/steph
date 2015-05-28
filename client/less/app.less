@@ -165,6 +165,9 @@ body {
 @items-width: @thumb-width * 3 + @thumb-margin * 3;
 @current-item-margin: 110px;
 @current-item-width: calc(~"100% -" @left-col-width + @items-width + @col-margin * 2 + @current-item-margin);
+@about-pic-width: 350px;
+@about-pic-margin: 40px;
+@about-text-width: calc(~"100% -" @left-col-width + @col-margin + @about-pic-margin + @about-pic-width);
 .ux-items {
   padding-bottom: @top-bottom-margin;
 
@@ -221,4 +224,52 @@ body {
       background-size: cover;
       background-position: center;
     }
+
+.ux-about {
+  &.hidden {
+    display: none;
+  }
+}
+  .ux-about-pic {
+    display: inline-block;
+    vertical-align: top;
+    width: @about-pic-width;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .ux-about-info {
+    float: right;
+    width: @about-text-width;
+
+    a {
+      color: rgb(255, 0, 0);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .ux-social-links {
+    position: relative;
+    left: -3px;
+
+    a {
+      margin-right: 5px;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+      fill: rgb(255, 0, 0);
+      transition: fill 0.3s;
+
+      &:hover {
+        fill: rgb(0, 0, 0);
+      }
+    }
+  }
 
