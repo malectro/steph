@@ -17,26 +17,25 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var proc, env;
+var env;
 try {
   env = require(__dirname + '/env.js');
-  proc = {env: env};
+  process.env = env;
 } catch (error) {
   if (error.code === 'MODULE_NOT_FOUND'){
     console.log('No env.js found. Assuming production.');
-    proc = process;
   }
 }
 
 // constants
-var PORT = proc.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 var TITLE = 'Steph';
 
 var Model = require(__dirname + '/models/models.js');
 
 
 // app
-var mongoUri = proc.env.MONGOLAB_URI || proc.env.MONGOHQ_URL || 'mongodb://localhost/' + TITLE.toLowerCase();
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/' + TITLE.toLowerCase();
 var db = mongoose.createConnection(mongoUri);
 var app = express();
 
@@ -159,8 +158,8 @@ App.setUpAuth = function () {
 
   // initialize twitter authentication via passport.
   passport.use(new TwitterStrategy({
-      consumerKey: proc.env.TWITTER_CONSUMER_KEY,
-      consumerSecret: proc.env.TWITTER_CONSUMER_SECRET,
+      consumerKey: process.env.TWITTER_CONSUMER_KEY,
+      consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
       callbackURL: '/auth/twitter/callback'
     },
     function (token, tokenSecret, twitterUser, done) {
@@ -172,8 +171,10 @@ App.setUpAuth = function () {
 
         var user;
         if (!auth) {
+          // For now we don't allow new users
+          return done('Nope');
           // User with this twitter Id doesn't exist.
-          user = addTwitterUser(twitterUser);
+          //user = addTwitterUser(twitterUser);
         } else {
           user = auth.user;
         }
@@ -256,7 +257,7 @@ App.routes = function () {
       return res.redirect('/auth/twitter');
     }
 
-    var context = {req: req, env: proc.env};
+    var context = {req: req, env: process.env};
     var done = _.after(2, function () {
       res.render('admin/index', context);
     });

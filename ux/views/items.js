@@ -33,7 +33,7 @@
         var width = this.$('.ux-item-current').width();
         $iframe.css({
           width: width,
-          height: Math.round($iframe.prop('height') * width / 1280)
+          height: Math.round($iframe.prop('height') * width / $iframe.prop('width'))
         });
       }
       return this;

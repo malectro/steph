@@ -44,20 +44,45 @@
         var id = _.uniqueId('embed');
         html = '<span id="' + id + '" class="ux-oembed"></span>';
 
-        $.ajax({
-          url: this.embedUrl(),
-          dataType: 'jsonp',
-          data: {
-            url: this.get('src'),
-            format: 'js'
-          },
-          success: _.bind(function (data) {
-            this.set('embed', data);
-            this.set('embedHtml', data.html);
-            this.set('thumb', data.thumbnail_url);
-            $('#' + id).replaceWith(data.html);
-          }, this)
-        });
+        var youtube = /youtube\.com\/watch\?v=(\w+)/.exec(this.get('src'));
+        if (youtube) {
+          var data = {
+            html:
+                '<iframe width="480" height="270" src="//www.youtube.com/embed/' +
+                youtube[1] +
+                '?feature=oembed" frameborder="0" allowfullscreen></iframe>',
+            height: 270,
+            type: 'video',
+            thumbnail_width: 480,
+            provider_url: 'http://www.youtube.com',
+            thumbnail_height: 360,
+            version: '1.0',
+            width: 480,
+            provider_name: 'YouTube',
+            thumbnail_url: '//i.ytimg.com/vi/' + youtube[1] + '/hqdefault.jpg'
+          };
+
+          this.set('embed', data);
+          this.set('embedHtml', data.html);
+          this.set('thumb', data.thumbnail_url);
+          $('#' + id).replaceWith(data.html);
+
+        } else {
+          $.ajax({
+            url: this.embedUrl(),
+            dataType: 'jsonp',
+            data: {
+              url: this.get('src'),
+              format: 'js'
+            },
+            success: _.bind(function (data) {
+              this.set('embed', data);
+              this.set('embedHtml', data.html);
+              this.set('thumb', data.thumbnail_url);
+              $('#' + id).replaceWith(data.html);
+            }, this)
+          });
+        }
       }
 
       return html;
