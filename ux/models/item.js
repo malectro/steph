@@ -17,8 +17,16 @@
       }
     },
 
+    mediumText: function () {
+      return {
+        video: 'watch',
+        radio: 'listen',
+        photo: 'see',
+      }[this.get('medium')];
+    },
+
     linkUrl: function () {
-      return this.get('medium') + '/' + this.id
+      return this.mediumText() + '/' + this.id
     },
 
     thumbSrc: function () {
